@@ -1,5 +1,5 @@
 COMMIT; -- saves your current state of db, before we apply below
-DROP DATABASE social_media; -- deletes your current db if you have, before we apply below
+DROP DATABASE IF EXISTS social_media; -- deletes your current db if you have, before we apply the below script
 CREATE DATABASE social_media; -- Creates db
 USE social_media; -- Uses db
 CREATE TABLE users (
@@ -72,6 +72,22 @@ CREATE TABLE blocked_users (
     CHECK (blocker_id != blocked_id)
 );
 
+CREATE TABLE reported (
+    report_id SERIAL PRIMARY KEY,             
+    reporter_id INT NOT NULL,                 
+    reported_post_id INT,                     
+    reported_user_id INT,                     
+    report_reason TEXT NOT NULL,              
+    report_date TIMESTAMP DEFAULT NOW(),      
+    status VARCHAR(20) DEFAULT 'pending',     -- The status of the report (e.g., pending, reviewed, resolved)
+
+    -- Foreign Key Constraints
+    FOREIGN KEY (reporter_id) REFERENCES users(user_id) ON DELETE CASCADE,
+    FOREIGN KEY (reported_post_id) REFERENCES posts(post_id) ON DELETE CASCADE,
+    FOREIGN KEY (reported_user_id) REFERENCES users(user_id) ON DELETE CASCADE
+);
+
+
 -- Users Seed
 INSERT INTO users (username, email, password_hash, date_of_birth, location, parental_controls_enabled)
 VALUES
@@ -120,3 +136,12 @@ VALUES
 (2, 3); -- Jane blocked Alex
 
 
+-- Reported Seed
+
+INSERT INTO reported (reporter_id, reported_post_id, report_reason)
+VALUES
+(1, 3, 'Inappropriate content');  -- John reports Alex's post
+
+INSERT INTO reported (reporter_id, reported_user_id, report_reason)
+VALUES
+(2, 3, 'Harassment');  -- Jane reports Alex as a user for harassment

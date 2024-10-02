@@ -1,5 +1,4 @@
 -- How many users have liked posts from users who are not their friends?
-
 SELECT COUNT(DISTINCT l.user_id) AS non_friend_likes
 FROM likes l
 JOIN posts p ON l.post_id = p.post_id

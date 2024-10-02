@@ -1,5 +1,4 @@
 -- Who are the top 10 most active users based on posts or interactions (based on likes/comments)?
-
 SELECT u.username, 
     COUNT(DISTINCT p.post_id) AS total_posts, 
     COUNT(DISTINCT l.like_id) AS total_likes_given, 
