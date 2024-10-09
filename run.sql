@@ -18,7 +18,6 @@ CREATE TABLE posts (
     user_id INT NOT NULL,
     content TEXT, -- Can store both text and media
     media_type ENUM('image', 'video', 'text') DEFAULT 'text',
-    location TEXT,
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     FOREIGN KEY (user_id) REFERENCES users(user_id) ON DELETE CASCADE
 );
@@ -98,11 +97,11 @@ VALUES
 ('chris_wilson', 'chris@example.com', 'hashed_password', '1987-08-03', 'Dallas', FALSE);
 
 -- Posts Seed
-INSERT INTO posts (user_id, content, media_type, location)
+INSERT INTO posts (user_id, content, media_type)
 VALUES
-(1, 'Check out this awesome sunset!', 'image', 'Malibu, California'),
-(2, 'Had a great time at the event today', 'text', 'New York, New York'),
-(3, 'Watch this cool video I made', 'video', 'Tokyo, Japan');
+(1, 'Check out this awesome sunset!', 'image'),
+(2, 'Had a great time at the event today', 'text'),
+(3, 'Watch this cool video I made', 'video');
 
 -- Likes seed
 INSERT INTO likes (user_id, post_id)
