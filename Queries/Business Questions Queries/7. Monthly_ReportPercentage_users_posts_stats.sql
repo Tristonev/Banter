@@ -1,3 +1,4 @@
+-- 7. Monthly Report percentage related to posts and users
 -- Step 1: Count total reports per month
 SELECT 
     DATE_FORMAT(report_date, '%Y-%m') AS report_month,
