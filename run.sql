@@ -89,61 +89,112 @@ CREATE TABLE reported (
 );
 
 
--- Users Seed
+--- Users Seed
 INSERT INTO users (username, email, password_hash, date_of_birth, parental_controls_enabled, first_name, last_name)
 VALUES
 ('john_doe', 'john@example.com', 'hashed_password', '2000-05-10', FALSE, 'John', 'Doe'),
 ('jane_smith', 'jane@example.com', 'hashed_password', '1995-03-15', FALSE, 'Jane', 'Smith'),
 ('alex_jones', 'alex@example.com', 'hashed_password', '2010-11-20', TRUE, 'Alex', 'Jones'),
-('chris_wilson', 'chris@example.com', 'hashed_password', '1987-08-03', FALSE, 'Chris', 'Wilson');
-
+('chris_wilson', 'chris@example.com', 'hashed_password', '1987-08-03', FALSE, 'Chris', 'Wilson'),
+('sam_green', 'sam@example.com', 'hashed_password', '2005-09-22', TRUE, 'Sam', 'Green'),
+('emma_brown', 'emma@example.com', 'hashed_password', '1990-06-18', FALSE, 'Emma', 'Brown'),
+('liam_taylor', 'liam@example.com', 'hashed_password', '1998-12-12', FALSE, 'Liam', 'Taylor'),
+('olivia_white', 'olivia@example.com', 'hashed_password', '1993-04-25', FALSE, 'Olivia', 'White'),
+('noah_hall', 'noah@example.com', 'hashed_password', '2007-03-05', TRUE, 'Noah', 'Hall'),
+('ava_clark', 'ava@example.com', 'hashed_password', '2002-11-30', FALSE, 'Ava', 'Clark');
 
 -- Posts Seed
 INSERT INTO posts (user_id, content, media_type)
 VALUES
 (1, 'Check out this awesome sunset!', 'image'),
 (2, 'Had a great time at the event today', 'text'),
-(3, 'Watch this cool video I made', 'video');
+(3, 'Watch this cool video I made', 'video'),
+(4, 'Exploring the mountains!', 'image'),
+(5, 'My first blog post!', 'text'),
+(6, 'Travel memories captured perfectly.', 'image'),
+(7, 'Happy to share this milestone.', 'text'),
+(8, 'The cutest cat video ever.', 'video'),
+(9, 'Nature never ceases to amaze me.', 'image'),
+(10, 'Throwback to an unforgettable day.', 'text');
 
--- Likes seed
+-- Likes Seed
 INSERT INTO likes (user_id, post_id)
 VALUES
-(1, 2), -- John likes Jane's post
-(2, 3), -- Jane likes Alex's post
-(3, 1); -- Alex likes John's post
+(1, 2), 
+(2, 3), 
+(3, 1), 
+(4, 5),
+(5, 4),
+(6, 7),
+(7, 8),
+(8, 9),
+(9, 10),
+(10, 6);
 
 -- Comments Seed 
 INSERT INTO comments (post_id, user_id, comment_text)
 VALUES
 (1, 2, 'That looks amazing!'),
 (2, 3, 'Glad you had fun!'),
-(3, 1, 'Great video!');
+(3, 1, 'Great video!'),
+(4, 5, 'Looks so peaceful!'),
+(5, 4, 'Well written.'),
+(6, 7, 'Stunning shot!'),
+(7, 8, 'Congrats!'),
+(8, 9, 'Haha, hilarious!'),
+(9, 10, 'Beautiful as always!'),
+(10, 6, 'This is inspiring!');
 
 -- Friendships Seed
 INSERT INTO friendships (user_id, friend_id, request_status)
 VALUES
-(1, 2, 'accepted'), -- John and Jane are friends
-(2, 3, 'accepted'), -- Jane and Alex are friends
-(1, 3, 'pending'); -- John sent a friend request to Alex
+(1, 2, 'accepted'), 
+(2, 3, 'accepted'), 
+(1, 3, 'pending'),
+(4, 5, 'accepted'),
+(5, 6, 'rejected'),
+(6, 7, 'accepted'),
+(7, 8, 'accepted'),
+(8, 9, 'pending'),
+(9, 10, 'accepted'),
+(10, 1, 'accepted');
 
 -- Messages Seed
 INSERT INTO messages (sender_id, receiver_id, message_content)
 VALUES
 (1, 2, 'Hey Jane, how’s it going?'),
-(2, 1, 'I’m doing well! How about you?');
+(2, 1, 'I’m doing well! How about you?'),
+(3, 4, 'Loved your recent post!'),
+(4, 5, 'Thanks for the message!'),
+(5, 6, 'Let’s catch up soon.'),
+(6, 7, 'Sure, sounds great.'),
+(7, 8, 'Sent you the details.'),
+(8, 9, 'Got it, thanks!'),
+(9, 10, 'When are we meeting?'),
+(10, 1, 'Let me know your availability.');
 
 -- Blocked Users Seed
 INSERT INTO blocked_users (blocker_id, blocked_id)
 VALUES
-(2, 3); -- Jane blocked Alex
-
+(2, 3), 
+(4, 5), 
+(6, 7), 
+(8, 9), 
+(10, 1);
 
 -- Reported Seed
-
 INSERT INTO reported (reporter_id, reported_post_id, report_reason)
 VALUES
-(1, 3, 'Inappropriate content');  -- John reports Alex's post
+(1, 3, 'Inappropriate content'),
+(2, 4, 'Spam'),
+(3, 5, 'Offensive language'),
+(4, 6, 'Copyright infringement'),
+(5, 7, 'Harassment');
 
 INSERT INTO reported (reporter_id, reported_user_id, report_reason)
 VALUES
-(2, 3, 'Harassment');  -- Jane reports Alex as a user for harassment
+(6, 8, 'Fake account'),
+(7, 9, 'Spam activity'),
+(8, 10, 'Bullying behavior'),
+(9, 1, 'Hate speech'),
+(10, 2, 'Inappropriate comments');
