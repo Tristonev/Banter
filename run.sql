@@ -1,6 +1,6 @@
 COMMIT; -- saves your current state of db, before we apply below
-DROP DATABASE IF EXISTS social_media; -- deletes your current db if you have, before we apply the below script
-CREATE DATABASE social_media; -- Creates db
+DROP SCHEMA IF EXISTS social_media; -- deletes your current db if you have, before we apply the below script
+CREATE SCHEMA social_media; -- Creates db
 USE social_media; -- Uses db
 CREATE TABLE users (
     user_id INT AUTO_INCREMENT PRIMARY KEY,
@@ -89,7 +89,7 @@ CREATE TABLE reported (
 );
 
 
---- Users Seed
+-- Users Seed
 INSERT INTO users (username, email, password_hash, date_of_birth, parental_controls_enabled, first_name, last_name)
 VALUES
 ('john_doe', 'john@example.com', 'hashed_password', '2000-05-10', FALSE, 'John', 'Doe'),
@@ -183,18 +183,18 @@ VALUES
 (10, 1);
 
 -- Reported Seed
-INSERT INTO reported (reporter_id, reported_post_id, report_reason)
+INSERT INTO reported (reporter_id, reported_post_id, report_reason, status)
 VALUES
-(1, 3, 'Inappropriate content'),
-(2, 4, 'Spam'),
-(3, 5, 'Offensive language'),
-(4, 6, 'Copyright infringement'),
-(5, 7, 'Harassment');
+(1, 3, 'Inappropriate content', 'reviewed'),
+(2, 4, 'Spam', 'resolved'),
+(3, 5, 'Offensive language', 'pending'),
+(4, 6, 'Copyright infringement', 'resolved'),
+(5, 7, 'Harassment', 'reviewed');
 
-INSERT INTO reported (reporter_id, reported_user_id, report_reason)
+INSERT INTO reported (reporter_id, reported_user_id, report_reason, status)
 VALUES
-(6, 8, 'Fake account'),
-(7, 9, 'Spam activity'),
-(8, 10, 'Bullying behavior'),
-(9, 1, 'Hate speech'),
-(10, 2, 'Inappropriate comments');
+(6, 8, 'Fake account', 'pending'),
+(7, 9, 'Spam activity', 'resolved'),
+(8, 10, 'Bullying behavior', 'resolved'),
+(9, 1, 'Hate speech', 'reviewed'),
+(10, 2, 'Inappropriate comments', 'pending');
